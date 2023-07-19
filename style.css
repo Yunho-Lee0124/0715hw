@@ -1,0 +1,183 @@
+body {
+    font-family: sans-serif;
+    background-color: #282828;
+  }
+  
+  .file-upload {
+    color: #ffffff;
+    background-color: #222222;
+    width: 500px;
+    height: 450px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 0%;
+    line-height: 200%;
+  }
+  
+  .file-upload-btn {
+    width: 100%;
+    margin: 0;
+    color: #ffffff;
+    background: #00FF00;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    border-bottom: 4px solid #00bb00;
+    transition: all 0.2s ease;
+    outline: none;
+    text-transform: uppercase;
+    font-weight: 700;
+    cursor: pointer; /* Added cursor style */
+  }
+  .file-upload-btn:hover {
+    background: #007700;
+    transition: all 0.2s ease;
+  }
+  
+  .file-upload-btn:active {
+    border: 0;
+    transition: all 0.2s ease;
+  }
+  
+  .file-upload-content {
+    display: none;
+    text-align: center;
+  }
+  
+  .file-upload-input {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    outline: none;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  .image-upload-wrap {
+    margin-top: 20px;
+    border: 4px dashed #0000ff;
+    position: relative;
+  }
+  
+  .image-dropping,
+  .image-upload-wrap:hover {
+    background-color: #0000ffa0;
+    border: 4px dashed #00ff00;
+  }
+  
+  .image-title-wrap {
+    padding: 0 15px 15px 15px;
+    color: #222;
+  }
+  
+  .drag-text {
+    text-align: center;
+  }
+  
+  .drag-text h3 {
+    font-weight: 100;
+    text-transform: uppercase;
+    color: #00ff00;
+    padding: 60px 0;
+  }
+  
+  .file-upload-image {
+    max-height: 200px;
+    max-width: 200px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  .remove-image {
+    width: 100%;
+    height: 100px;
+    margin: 0;
+    color: #ffffff;
+    background: #ff0000;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    border-bottom: 4px solid #bb0000;
+    transition: all 0.2s ease;
+    outline: none;
+    text-transform: uppercase;
+    font-weight: 700;
+    cursor: pointer; /* Added cursor style */
+    word-wrap: break-word;
+  }
+  
+  .remove-image:hover {
+    background: #770000;
+    transition: all 0.2s ease;
+  }
+  
+  .remove-image:active {
+    border: 0;
+    transition: all 0.2s ease;
+  }
+  
+  .title-wrap {
+    background-color: #222222;
+    width: 500px;
+    height: 130px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 0%;
+    line-height: 150%;
+    text-align: center;
+  }
+  .st {
+    width: 49%;
+    margin: 0;
+    color: #ffffff;
+    background: #0000ff;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    border-bottom: 4px solid #0000bb;
+    transition: all 0.2s ease;
+    outline: none;
+    text-transform: uppercase;
+    font-weight: 700;
+    cursor: pointer; /* Added cursor style */
+  }
+  
+  .st:hover {
+    background: #000077;
+    transition: all 0.2s ease;
+  }
+
+  .pr {
+    width: 49%;
+    margin: 0;
+    color: #ffffff;
+    background: #0000ff;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    border-bottom: 4px solid #0000bb;
+    transition: all 0.2s ease;
+    outline: none;
+    text-transform: uppercase;
+    font-weight: 700;
+    cursor: pointer; /* Added cursor style */
+  }
+  
+  .pr:hover {
+    background: #000077;
+    transition: all 0.2s ease;
+  }
+
+  .title {
+    width: 500px;
+    height: 100px;
+    line-height: 100%;
+    color: #ffffff;
+    text-align: center;
+  }
+
+  .output {
+    text-align: center;
+  }

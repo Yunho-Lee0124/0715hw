@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>자동차 브랜드 구별</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="title-wrap">
+    <div class="title">
+     <h1>자동차 브랜드 구별 (국내기업용)</h1>
+     <h2>ver 1.3.0</h2>
+     <h3>Made by Yunho-Lee0124</h3>
+    </div>
+  </div>
+
+  <h3>　</h3>
+  
+  <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  <div class="file-upload">
+    <button class="st" type="button" onclick="init()">모델불러오기</button>
+    <button class="pr" type="button" onclick="predict()">예측하기</button>
+    <h6></h6>
+    <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">파일 선택</button>
+
+    <div class="image-upload-wrap">
+      <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+      <div class="drag-text">
+        <h3>드래그 앤 드롭 또는 파일</h3>
+      </div>
+    </div>
+    <div class="file-upload-content">
+      <img class="file-upload-image" id="input_image" src="#" alt="your image" />
+      <div class="image-title-wrap">
+        <button type="button" onclick="removeUpload()" class="remove-image"><span class="image-title">이미지 </span>&nbsp;제거</button>
+      </div>
+    </div>
+    <div class="output">
+      <div id="label-container"></div>
+    </div>
+  </div>
+
+  <div id="webcam-container"></div>
+  <div id="label-container"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+  <script>
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          $('.image-upload-wrap').hide();
+
+          $('.file-upload-image').attr('src', e.target.result);
+          $('.file-upload-content').show();
+
+          $('.image-title').html(input.files[0].name);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+
+      } else {
+        removeUpload();
+      }
+    }
+
+    function removeUpload() {
+      $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+      $('.file-upload-content').hide();
+      $('.image-upload-wrap').show();
+    }
+    $('.image-upload-wrap').bind('dragover', function () {
+      $('.image-upload-wrap').addClass('image-dropping');
+    });
+    $('.image-upload-wrap').bind('dragleave', function () {
+      $('.image-upload-wrap').removeClass('image-dropping');
+    });
+  </script>
+
+
+  <script type="text/javascript">
+    const URL = "https://teachablemachine.withgoogle.com/models/R_uhEVgNW/";
+
+    let model, webcam, labelContainer, maxPredictions;
+
+    async function init() {
+      const modelURL = URL + "model.json";
+      const metadataURL = URL + "metadata.json";
+
+      model = await tmImage.load(modelURL, metadataURL);
+      maxPredictions = model.getTotalClasses();
+
+      const flip = true; // whether to flip the webcam
+      webcam = new tmImage.Webcam(200, 200, flip); // width, height, flip
+      labelContainer = document.getElementById("label-container");
+      for (let i = 0; i < maxPredictions; i++) { // and class labels
+        labelContainer.appendChild(document.createElement("div"));
+      }
+    }
+
+    async function predict() {
+      var new_image = document.getElementById("input_image");
+      const prediction = await model.predict(new_image, false);
+
+      if (prediction[0].className == "현대자동차" && prediction[0].probability.toFixed(2) > 0.85) {
+        labelContainer.childNodes[0].innerHTML = "현대자동차(1967.12.29~) Hyundai Mortos Company"
+      }
+      else if (prediction[1].className == "기아자동차" && prediction[1].probability.toFixed(2) > 0.85) {
+        labelContainer.childNodes[0].innerHTML = "기아(1944.12.11~) KIA Corporation"
+      } 
+      else if (prediction[2].className == "제네시스" && prediction[2].probability.toFixed(2) > 0.85) {
+        labelContainer.childNodes[0].innerHTML = "GENESIS(2015.11.04~) GENESIS MOTOR"
+      }
+      else if (prediction[3].className == "KG모빌리티" && prediction[3].probability.toFixed(2) > 0.85) {
+        labelContainer.childNodes[0].innerHTML = "KG모빌리티(1954.01.??~) KG Mobility Corporation"
+      }
+      else if (prediction[4].className == "르노코리아자동차" && prediction[4].probability.toFixed(2) > 0.85) {
+        labelContainer.childNodes[0].innerHTML = "르노코리아자동차(2000.07.14~) Renault Korea Motors"
+      }
+      else {
+        labelContainer.childNodes[0].innerHTML = "몰?루"
+      }
+    }
+  </script>
+
+</body>
+
+</html>
